@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Control an AR Drone from the browser!</title>
+
+	</head>
+
+	<body>
+    	<!-- Firebase -->
+		<script src="https://cdn.firebase.com/js/client/1.0.24/firebase.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+		<script type="text/javascript">
+			$(function() {
+				var ref = new Firebase('https://ardrone.firebaseio-demo.com'),
+					takeoffRef = ref.child('takeoff'),
+					leftRef = ref.child('rollLeft'),
+					rightRef = ref.child('rollRight'),
+					pitchUpRef = ref.child('pitchUp'),
+					pitchDownRef = ref.child('pitchDown')
+					yawCWRef = ref.child('yarClockwise'),
+					yawCCWRef = ref.child('yawCounterClockwise'),
+					throttleUpRef = ref.child('throttleUp'),
+					throttleDownRef = ref.child('throttleDown');
+
+
+				$(document).keydown(function(e){
+					switch (e.which) {
+						case 13:
+							console.log('enter pressed')
+							takeoffRef.set(1);
+							break;
+
+						case 32:
+							console.log('space pressed')
+							takeoffRef.set(0);
+							break;
+
+						case 37:
+							console.log('left pressed')
+							leftRef.set(1);
+							break;
+
+						case 38:
+							console.log('up pressed')
+							pitchUpRef.set(1);
+							break;
+
+						case 39:
+							console.log('right pressed')
+							rightRef.set(1);
+							break;
+
+						case 40:
+							console.log('down pressed')
+							pitchDownRef.set(1);
+							break;
+
+						case 87:
+							console.log('w pressed');
+							throttleUpRef.set(1);
+							break;
+
+						case 65:
+							console.log('a pressed');
+							yawCCWRef.set(1);
+							break;
+
+						case 83:
+							console.log('s pressed');
+							throttleDownRef.set(1);
+							break;
+
+						case 68:
+							console.log('d pressed');
+							yawCWRef.set(1);
+							break;
+
+						default:
+							break;
+					}
+				});
+
+				$(document).keyup(function(e){
+					switch (e.which) {
+						case 37:
+							console.log('left released')
+							leftRef.set(0);
+							break;
+
+						case 38:
+							console.log('up released')
+							pitchUpRef.set(0);
+							break;
+
+						case 39:
+							console.log('right released')
+							rightRef.set(0);
+							break;
+
+						case 40:
+							console.log('down released')
+							pitchDownRef.set(0);
+							break;
+
+						case 87:
+							console.log('w released');
+							throttleUpRef.set(0);
+							break;
+
+						case 65:
+							console.log('a released');
+							yawCCWRef.set(0);
+							break;
+
+						case 83:
+							console.log('s released');
+							throttleDownRef.set(0);
+							break;
+
+						case 68:
+							console.log('d released');
+							yawCWRef.set(0);
+							break;
+
+						default:
+							break;
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
